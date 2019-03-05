@@ -3,13 +3,15 @@
 using namespace std;
 
 long long PowerN(long long a, long long n) {
-	if (n == 1)return a;
+	if (n == 0)return 1;
+	else  if (n == 1)return a;
 	return a * PowerN(a, n - 1);
 }
 
 long long PowerN2(long long a, long long n) {
-	if (n == 1)return 2;
-	if (n % 2 == 1) {
+	if (n == 0)return 1;
+	else if (n == 1)return 2;
+	else if (n % 2 == 1) {
 		n++;
 		return (PowerN2(a, n / 2)*PowerN2(a, n / 2))/a;
 	}
@@ -19,7 +21,7 @@ long long PowerN2(long long a, long long n) {
 int main() {
 
 	cout << PowerN(2, 5) << endl;
-	cout << PowerN2(2, 4) << endl;
+	cout << PowerN2(2, 0) << endl;
 
 	system("pause");
 	return 0;
