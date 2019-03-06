@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1551809068 source:c:\users\abdo\downloads\fci\d.s\string\main.cpp
+	<iostream>
+	"studentName.h"
+
+1551808786 c:\users\abdo\downloads\fci\d.s\string\studentname.h
+	<bits/stdc++.h>
+
+1551809269 source:c:\users\abdo\downloads\fci\d.s\string\studentname.cpp
+	"studentName.h"
+
