@@ -17,16 +17,16 @@ private:
 	int sz;
 
 public:
-	LinkedList(){}
-
-	virtual ~LinkedList() {
-		Node<T> * current = head;
-		while (current != 0) {
-			Node<T> * next = current->next;
-			delete current;
-			current = next;
+	LinkedList() { sz = 0; }
+	LinkedList(LinkedList<T> const& rhs)
+	{
+		sz = 0;
+		Node<T> *temp = new Node<T>;
+		temp = rhs.head;
+		for (int i = 0; i < rhs.sz; ++i) {
+			this->push_back(temp->value);
+			temp = temp->next;
 		}
-		head = 0;
 	}
 
 	class Iterator;
@@ -47,11 +47,17 @@ public:
 
 	void push_back(T data);
 	void insert(T value, int pos);
-	/*void insert(T value, Iterator& pos) {
-		Node<T> * temp = new Node<T>;
-		temp->value = value;
-		temp->last = pos.currentNode->
-	}*/
+	void insert(T value, Iterator& pos);
+
+	LinkedList<T>& operator =(const LinkedList<T>& rhs) {
+		Node<T> *temp = new Node<T>;
+		temp = rhs.head;
+		for (int i = 0; i < rhs.sz; ++i) {
+			this->push_back(temp->value);
+			temp = temp->next;
+		}
+		return *this;
+	}
 
 	Iterator erase(int pos) {
 		if (pos < 1 || pos > sz + 1) throw invalid_argument("Invalied position!");
@@ -69,7 +75,6 @@ public:
 		sz--;
 		return Iterator(pre->next);
 	}
- 
 	class Iterator {
 	private:
 		Node<T>* CurrentNode;
@@ -123,6 +128,16 @@ public:
 			return CurrentNode->value;
 		}
 	};
+
+	virtual ~LinkedList() {
+		Node<T> * current = head;
+		while (current != 0) {
+			Node<T> * next = current->next;
+			delete current;
+			current = next;
+		}
+		head = 0;
+	}
 };
 
 template <typename T>
@@ -166,16 +181,31 @@ void LinkedList<T>::insert(T value, int pos) {
 
 int main()
 {
-	LinkedList<int> *list = new LinkedList<int>;
+	LinkedList<int> list;
 
-	list->push_back(1);
-	list->push_back(2);
-	list->push_back(3);
-	list->insert(5, 5);
+	list.push_back(1);
+	list.push_back(2);
+	list.push_back(3);
+	//list->insert(5, 5);
 
-	for (LinkedList<int>::Iterator iterator = list->begin();
-		iterator != list->end(); iterator++)
-	{
+	for (LinkedList<int>::Iterator iterator = list.begin(); iterator != list.end(); iterator++){
+		cout << *iterator << " ";
+	}
+	cout << endl;
+	LinkedList<int>::Iterator t = list.begin();
+	cout << *t++ << endl;
+	cout << *t++ << endl;
+	cout << *--t << endl;
+
+	LinkedList<int> copyList;
+	copyList = list;
+	copyList.insert(5, 2);
+	list.push_back(10);
+	for (LinkedList<int>::Iterator iterator = copyList.begin(); iterator != copyList.end(); iterator++){
+		cout << *iterator << " ";
+	}cout << endl;
+
+	for (LinkedList<int>::Iterator iterator = list.begin(); iterator != list.end(); iterator++) {
 		cout << *iterator << " ";
 	}
 
