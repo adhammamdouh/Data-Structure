@@ -30,6 +30,25 @@ node * BSTree::search(node * cur, int value)
 	return cur;
 }
 
+void BSTree::printRange(int l, int r, node * _root)
+{
+	if (_root == nullptr) return;
+
+	if (_root->value < l) {
+		printRange(l, r, _root->right);
+	}
+	else if (_root->value >= l && _root->value <= r)
+	{
+		printRange(l, r, _root->left);
+		cout << _root->value << endl;
+		printRange(l, r, _root->right);
+	}
+	else if (_root->value > r) {
+		printRange(l, r, _root->left);
+	}
+
+}
+
 BSTree::BSTree()
 {
 	root = nullptr;
@@ -38,10 +57,7 @@ BSTree::BSTree()
 
 BSTree::BSTree(node * n)
 {
-	root = new node;
-	root->value = n->value;
-	root->left = nullptr;
-	root->right = nullptr;
+	root = newNode(n->value);
 	size = 1;
 }
 
@@ -87,23 +103,9 @@ void BSTree::inorder(node *root)
 	}
 }
 
-void BSTree::printRange(node * root, int l, int r)
+void BSTree::printRange(int l, int r)
 {
-	if (root == nullptr) return;
-	
-	if (root->value < l) {
-		printRange(root->right, l, r);
-	}
-	else if (root->value >= l && root->value <= r)
-	{
-		printRange(root->left, l, r);
-		cout << root->value << endl;
-		printRange(root->right, l, r);
-	}
-	else if (root->value > r) {
-		printRange(root->left, l, r);
-	}
-	
+	printRange(l, r, this->root);
 }
 
 BSTree::~BSTree()
