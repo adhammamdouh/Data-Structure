@@ -18,6 +18,7 @@ private:
 	node * newNode(int value);
 	node * addInTree(node * nde, int key);
 	node * search(node * cur, int value);
+	void printRange(int l, int r, node * _root);
 	friend bool Compare(node * node1, node * node2);
 
 public:
@@ -28,7 +29,7 @@ public:
 	void flip();
 	void flip(node * node);
 	void inorder(node *root);
-	void printRange(node * root, int l, int r);
+	void printRange(int l, int r);
 	virtual ~BSTree();
 
 	friend bool isSubTree(BSTree* Tree1, BSTree* Tree2);
