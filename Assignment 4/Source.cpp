@@ -4,22 +4,26 @@
 using namespace std;
 
 int main() {
-	BSTree BSTFCI;
-	BSTFCI.add(5);
-	BSTFCI.add(1);
-	BSTFCI.add(0);
-	BSTFCI.add(15);
-	BSTFCI.add(125);
-	BSTFCI.add(5156);
-	BSTFCI.add(41);
-	BSTFCI.add(12);
-	BSTFCI.add(0);
-	BSTFCI.add(-1);
-	BSTFCI.add(-15);
-	BSTFCI.add(125);
-	BSTFCI.add(84);
+	BSTree * BSTFCI = new BSTree;
+	BSTFCI->add(5);
+	BSTFCI->add(3);
+	BSTFCI->add(7);
+	BSTFCI->add(2);
+	BSTFCI->add(4);
+	BSTFCI->add(9);
+	BSTFCI->add(1);
+	BSTFCI->add(8);
+	BSTFCI->add(10);
 
-	BSTFCI.inorder(BSTFCI.getRoot());
+	BSTree * second = new BSTree;
+	second->add(3);
+	second->add(2);
+	second->add(4);
+	second->add(1);
+
+	BSTFCI->printRange(8, 15);
+
+	cout << "\nis Subtree >> " << isSubTree(second, BSTFCI) << endl;
 
 	system("pause");
 	return 0;
