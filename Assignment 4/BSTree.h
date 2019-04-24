@@ -1,5 +1,7 @@
 #pragma once
-#include<stdio.h> 
+#include<iostream>
+
+using namespace std;
 
 struct node
 {
@@ -12,14 +14,23 @@ class BSTree
 {
 private:
 	node * root;
+	int size;
 	node * newNode(int value);
 	node * addInTree(node * nde, int key);
+	node * search(node * cur, int value);
+	friend bool Compare(node * node1, node * node2);
+
 public:
 	BSTree();
 	BSTree(node * n);
 	node * getRoot();
 	node * add(int value);
+	void flip();
+	void flip(node * node);
 	void inorder(node *root);
+	void printRange(node * root, int l, int r);
 	virtual ~BSTree();
+
+	friend bool isSubTree(BSTree* Tree1, BSTree* Tree2);
 };
 
